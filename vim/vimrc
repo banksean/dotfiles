@@ -1,0 +1,55 @@
+let g:enable_local_swap_dirs = 1
+colorscheme darkblue
+
+set all&
+autocmd!
+" DO NOT PUT ANY AUTOCOMMANDS BEFORE THIS LINE
+set mouse=a
+set ruler
+call pathogen#infect()
+" syntax on
+set ttymouse=xterm2
+set backspace=indent,eol,start
+set tabstop=2
+set cursorline
+set expandtab
+
+autocmd bufenter * if !argc() | NERDTree | endif
+
+" Go "IDE"
+
+" 1. General stuff.
+au BufEnter *.go set shiftwidth=8 noexpandtab
+"au BufEnter *.go map <F2> :cprev<CR>
+"au BufEnter *.go map <F3> :cnext<CR>
+au BufEnter *.go set number
+au BufEnter *.go set paste
+
+" These don't work any more because gnome-terminal is in some other directory now.
+au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"    
+au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+au VimEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+
+set t_Co=16
+let g:solarized_termcolors=256
+syntax enable
+set background=dark
+colorscheme solarized
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+set number
+set paste
+set colorcolumn=80
+
+command W w
+command Q q
+let NERDTreeIgnore = ['\.pyc$']
+
+autocmd FileType make setlocal noexpandtab
+autocmd FileType *.go setlocal noexpandtab
+
+"set nobackup       #no backup files
+"set nowritebackup  #only in case you don't want a backup file while editing
+"set noswapfile     #no swap files
+
